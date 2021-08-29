@@ -19,23 +19,25 @@ app.get('/', function (req, res) {
     res.send(fs.readFileSync('main.html', 'utf-8'))
 })
 
+const { exec } = require("child_process")
+
 app.post('/pdftohtml', function (req, res) {
     const form = new formidable.IncomingForm()
     form.parse(req, (err, fields, files) => {
         const dir = "output/" + Date.now()
         fs.mkdirSync(dir)
-        
+
         const poppler = new Poppler("/usr/bin")
         poppler.pdfToHtml(files.pdf.path, dir + '/result.html', options).then((r) => {
             console.info("Success!")
         
-            fs.readFile(dir + "/result_ind.html", 'utf8', (err, data) => {
+            fs.readFile(dir + "/result_ind.html", 'utf8', (err, _data) => {
                 if (err) {
                     console.error(err)
                     return
                 }
         
-                const fileList = data.match(/(?<=href\=\")result\-[0-9]+\.html/g)
+                const fileList = _data.match(/(?<=href\=\")result\-[0-9]+\.html/g)
         
                 fileList.forEach(fileName => {
                     try {
@@ -45,6 +47,21 @@ app.post('/pdftohtml', function (req, res) {
                         console.error(e)
                     }
                 })
+                const zip_output_name = "output.zip"
+                exec(`sudo zip -q -r "${dir}/${zip_output_name}" "${dir}"`, (error, stdout, stderr) => {
+                    if (error) {
+                        console.log(`error: ${error.message}`);
+                        return;
+                    }
+                    if (stderr) {
+                        console.log(`stderr: ${stderr}`);
+                        return;
+                    }
+                })
+
+                fs.writeFileSync(dir + "/result.html", fs.readFileSync(dir + "/result.html", 'utf-8').replace("100,*", `120,*`))
+                fs.writeFileSync(dir + "/result_ind.html", _data.replace("<body>", `<body>\n<a href="${zip_output_name}" target="_blank" >[Download]</a><br/>`))
+
 
                 res.redirect(dir + '/result.html')
                 //res.send(`<meta http-equiv="refresh" content="0; url=/${dir + '/result.html'}">`)
@@ -62,7 +79,11 @@ const cert_options = {
     ca: fs.readFileSync(__dirname + '/../certs/chain.pem')
 }
 
-const https = require('https');
-const server = https.createServer(cert_options, app);
+//const https = require('https');
+//const server = https.createServer(cert_options, app);
 
-server.listen(PORT, () => console.log(`Server listening on port: ${PORT}`))
+const http = require('http');
+const server2 = http.createServer(app);
+
+//server.listen(PORT, () => console.log(`Server listening on port: ${PORT}`))
+server2.listen(80, () => console.log(`Server listening on port: ${PORT}`))
