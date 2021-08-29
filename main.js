@@ -12,12 +12,10 @@ const formidable = require("formidable")
 const form = new formidable.IncomingForm()
 
 const express = require('express')
-const serveIndex = require('serve-index')
-const app = express()
-const PORT = 3000
 
-app.use(express.static(__dirname))
-//app.use('/', serveIndex(__dirname))
+const app = express()
+
+app.use('/output', express.static(__dirname + '/output'))
 
 app.get('/', function (req, res) {
     res.send(fs.readFileSync('main.html', 'utf-8'))
@@ -55,4 +53,16 @@ app.post('/pdftohtml', function (req, res) {
     })
 })
 
-app.listen(PORT, () => console.log(`Server listening on port: ${PORT}`))
+//===============================
+
+const PORT = 443
+const cert_options = {
+    key: fs.readFileSync(__dirname + '/../certs/privkey.pem'),
+    cert: fs.readFileSync(__dirname + '/../certs/cert.pem'),
+    ca: fs.readFileSync(__dirname + '/../certs/chain.pem')
+}
+
+const https = require('https');
+const server = https.createServer(cert_options, app);
+
+server.listen(PORT, () => console.log(`Server listening on port: ${PORT}`))
