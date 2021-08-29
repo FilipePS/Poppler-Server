@@ -1,7 +1,6 @@
 const fs = require("fs")
 
 const { Poppler } = require("node-poppler")
-const poppler = new Poppler("/usr/bin")
 const options = {
 	ignoreImages: true,
 	complexOutput: true,
@@ -9,7 +8,6 @@ const options = {
 }
 
 const formidable = require("formidable")
-const form = new formidable.IncomingForm()
 
 const express = require('express')
 
@@ -22,10 +20,12 @@ app.get('/', function (req, res) {
 })
 
 app.post('/pdftohtml', function (req, res) {
+    const form = new formidable.IncomingForm()
     form.parse(req, (err, fields, files) => {
         const dir = "output/" + Date.now()
         fs.mkdirSync(dir)
         
+        const poppler = new Poppler("/usr/bin")
         poppler.pdfToHtml(files.pdf.path, dir + '/result.html', options).then((r) => {
             console.info("Success!")
         
