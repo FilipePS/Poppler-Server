@@ -1,0 +1,32 @@
+{
+  "name": "poppler-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "forever": "^4.0.1",
+    "formidable": "^1.2.2",
+    "node-poppler": "^4.1.1",
+    "serve-index": "^1.9.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "clear && nodejs main.js",
+    "start_pm2": "clear && pm2 start main.js",
+    "stop": "pm2 top main",
+    "clear_out": "rm -rf output && mkdir output",
+    "clear_up": "rm -rf uploads && mkdir uploads",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FilipePS/Poppler-Server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FilipePS/Poppler-Server/issues"
+  },
+  "homepage": "https://github.com/FilipePS/Poppler-Server#readme"
+}
