@@ -7,15 +7,15 @@
     "express": "^4.17.1",
     "forever": "^4.0.1",
     "formidable": "^1.2.2",
-    "https": "^1.0.0",
     "node-poppler": "^4.1.1",
+    "pm2": "^5.1.1",
     "serve-index": "^1.9.1"
   },
   "devDependencies": {},
   "scripts": {
     "start": "clear && sudo nodejs main.js",
-    "start_pm2": "sudo pm2 stop main && clear && sudo pm2 start main.js",
-    "stop_pm2": "sudo pm2 stop main",
+    "start_pm2": "sudo clear && sudo npx pm2 start main.js",
+    "stop_pm2": "sudo npx pm2 stop main",
     "clear_out": "rm -rf output && mkdir output",
     "clear_up": "rm -rf uploads && mkdir uploads",
     "test": "echo \"Error: no test specified\" && exit 1"
