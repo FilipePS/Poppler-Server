@@ -13,6 +13,10 @@ const express = require('express')
 
 const app = express()
 
+const morgan = require('morgan')
+const accessLogStream = fs.createWriteStream(__dirname + '/access.log', { flags: 'a' })
+app.use(morgan('combined', { stream: accessLogStream }))
+
 app.use('/output', express.static(__dirname + '/output'))
 
 app.get('/', function (req, res) {
