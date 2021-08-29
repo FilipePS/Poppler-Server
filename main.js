@@ -73,17 +73,17 @@ app.post('/pdftohtml', function (req, res) {
 //===============================
 
 const PORT = 443
-// const cert_options = {
-//     key: fs.readFileSync(__dirname + '/../certs/privkey.pem'),
-//     cert: fs.readFileSync(__dirname + '/../certs/cert.pem'),
-//     ca: fs.readFileSync(__dirname + '/../certs/chain.pem')
-// }
+const cert_options = {
+    key: fs.readFileSync(__dirname + '/../certs/privkey.pem'),
+    cert: fs.readFileSync(__dirname + '/../certs/cert.pem'),
+    ca: fs.readFileSync(__dirname + '/../certs/chain.pem')
+}
 
-//const https = require('https');
-//const server = https.createServer(cert_options, app);
+const https = require('https');
+const server = https.createServer(cert_options, app);
 
 const http = require('http');
 const server2 = http.createServer(app);
 
-//server.listen(PORT, () => console.log(`Server listening on port: ${PORT}`))
+server.listen(PORT, () => console.log(`Server listening on port: ${PORT}`))
 server2.listen(80, () => console.log(`Server listening on port: ${80}`))
