@@ -78,9 +78,9 @@ app.post('/pdftohtml', function (req, res) {
 
 const PORT = 443
 const cert_options = {
-    key: fs.readFileSync(__dirname + '/../certs/privkey.pem'),
-    cert: fs.readFileSync(__dirname + '/../certs/cert.pem'),
-    ca: fs.readFileSync(__dirname + '/../certs/chain.pem')
+    key: fs.readFileSync('/etc/letsencrypt/live/translatewebpages.org/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/translatewebpages.org/cert.pem'),
+    ca: fs.readFileSync('/etc/letsencrypt/live/translatewebpages.org/chain.pem')
 }
 
 const https = require('https');
