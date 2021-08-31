@@ -32,7 +32,7 @@ app.post('/pdftohtml', function (req, res) {
         fs.mkdirSync(dir)
 
         const poppler = new Poppler("/usr/bin")
-        poppler.pdfToHtml(files.pdf.path, dir + '/result.html', options).then((r) => {
+        poppler.pdfToHtml(files.file.path, dir + '/result.html', options).then((r) => {
             console.info("Success!")
         
             fs.readFile(dir + "/result_ind.html", 'utf8', (err, _data) => {
