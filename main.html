@@ -8,8 +8,9 @@
     <meta http-equiv="refresh" content=`0; url=/${}`>
 </head>
 <body>
+    <p>Select a PDF document to convert it to HTML. Uploaded files will be deleted from the server within 24 hours.</p>
     <form action="/pdftohtml" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" id="" required>
+        <input type="file" name="file" id="" accept="application/pdf" required>
         <input type="submit" value="Send">
     </form>
 </body>
