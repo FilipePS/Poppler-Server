@@ -24,7 +24,12 @@ app.get('/', function (req, res) {
 })
 
 app.post('/pdftohtml', async function (req, res) {
-    res.redirect(await inputToHtml(req))
+    try {
+        res.redirect(await inputToHtml(req))
+    } catch (e) {
+        console.error(e)
+        res.status(500).send("Internal server error")
+    }
 })
 
 function changeBackgroundColor(dir, singlePage, color="#FFFFFF") {
