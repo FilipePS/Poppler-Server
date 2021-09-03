@@ -93,9 +93,9 @@ async function inputToHtml(req) {
     changeBackgroundColor(out_dir, singlePage)
 
     if (singlePage) {
-        return out_dir + "/result-html.html"
+        return out_dir + "/result-html.html" + (typeof fields.autotranslate !== 'undefined' ? "?autotranslate" : "")
     } else {
-        return out_dir + "/result.html"
+        return out_dir + "/result.html" + (typeof fields.autotranslate !== 'undefined'  ? "?autotranslate" : "")
     }
 }
 
