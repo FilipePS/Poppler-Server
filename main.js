@@ -15,13 +15,8 @@ const { resolve } = require('path')
 const accessLogStream = fs.createWriteStream(__dirname + '/access.log', { flags: 'a' })
 app.use(morgan('combined', { stream: accessLogStream }))
 
+app.use('/', express.static(__dirname + '/public'))
 app.use('/output', express.static(__dirname + '/output'))
-
-
-// create routes
-app.get('/', function (req, res) {
-    res.send(fs.readFileSync('main.html', 'utf-8'))
-})
 
 app.post('/pdftohtml', async function (req, res) {
     try {
