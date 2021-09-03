@@ -104,11 +104,12 @@ async function inputToHtml(req) {
 const http_server = http.createServer(app)
 http_server.listen(80, () => console.log(`Server listening on port: ${80}`))
 
-
-const cert_options = {
-    key: fs.readFileSync('/etc/letsencrypt/live/translatewebpages.org/privkey.pem'),
-    cert: fs.readFileSync('/etc/letsencrypt/live/translatewebpages.org/cert.pem'),
-    ca: fs.readFileSync('/etc/letsencrypt/live/translatewebpages.org/chain.pem')
+if (process.argv.indexOf("-nohttps") == -1) {
+    const cert_options = {
+        key: fs.readFileSync('/etc/letsencrypt/live/translatewebpages.org/privkey.pem'),
+        cert: fs.readFileSync('/etc/letsencrypt/live/translatewebpages.org/cert.pem'),
+        ca: fs.readFileSync('/etc/letsencrypt/live/translatewebpages.org/chain.pem')
+    }
+    const https_server = https.createServer(cert_options, app);
+    https_server.listen(443, () => console.log(`Server listening on port: ${433}`))
 }
-const https_server = https.createServer(cert_options, app);
-https_server.listen(443, () => console.log(`Server listening on port: ${433}`))
