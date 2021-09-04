@@ -66,7 +66,7 @@ function changeBackgroundColor(dir, singlePage, color="#FFFFFF") {
 }
 
 async function inputToHtml(req) {
-    const form = new formidable.IncomingForm({uploadDir: __dirname + '/uploads', keepExtensions: true, allowEmptyFiles: false, maxFileSize: 1024*1024*24})
+    const form = new formidable.IncomingForm({uploadDir: __dirname + '/uploads', keepExtensions: true, allowEmptyFiles: false, maxFileSize: 1024*1024*512})
     const [err, fields, files] = await new Promise(resolve => form.parse(req, (err, fields, files) => resolve([err, fields, files])))
     
     if (err) {
