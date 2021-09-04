@@ -9,3 +9,6 @@ sudo apt install poppler-utils -y
 sudo apt install zip -y
 
 npm install
+
+mkdir uploads
+mkdir output
