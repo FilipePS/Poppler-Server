@@ -20,6 +20,7 @@ app.use('/output', express.static(__dirname + '/output'))
 
 app.post('/pdftohtml', async function (req, res) {
     try {
+        console.info('starting')
         res.redirect(await inputToHtml(req))
     } catch (e) {
         console.error(e)
@@ -65,8 +66,12 @@ function changeBackgroundColor(dir, singlePage, color="#FFFFFF") {
 }
 
 async function inputToHtml(req) {
-    const form = new formidable.IncomingForm()
+    const form = new formidable.IncomingForm({uploadDir: __dirname + '/uploads', keepExtensions: true, allowEmptyFiles: false, maxFileSize: 1024*1024*24})
     const [err, fields, files] = await new Promise(resolve => form.parse(req, (err, fields, files) => resolve([err, fields, files])))
+    
+    if (err) {
+        throw new Error(err);
+    }
 
     const out_dir = "output/" + Date.now()
     console.info(out_dir)
