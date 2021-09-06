@@ -10,8 +10,22 @@ fs.readdir('./output', (err, files) => {
         if ((Date.now() - date.getTime()) / 1000 / 60 / 60 > 6) {
             removed++
             console.log(file)
-            //fs.rmdirSync('./output/' + file, {recursive: true, : true})
             rimraf.sync('./output/' + file)
+        }
+    })
+    console.info(total, removed)
+})
+
+fs.readdir('./uploads', (err, files) => {
+    let total = 0
+    let removed = 0
+    files.forEach(file => {
+        total++
+        const { birthtime } = fs.statSync('./uploads/' + file)
+        if ((Date.now() - birthtime.getTime()) / 1000 / 60 / 60 > 6) {
+            removed++
+            console.log(file)
+            fs.unlinkSync('./uploads/' + file)
         }
     })
     console.info(total, removed)
