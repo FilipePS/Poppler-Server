@@ -22,7 +22,7 @@ fs.readdir('./uploads', (err, files) => {
     files.forEach(file => {
         total++
         const { birthtime } = fs.statSync('./uploads/' + file)
-        if ((Date.now() - birthtime.getTime()) / 1000 / 60 / 60 > 6) {
+        if ((Date.now() - birthtime.getTime()) / 1000 / 60 / 60 > 1) {
             removed++
             console.log(file)
             fs.unlinkSync('./uploads/' + file)
