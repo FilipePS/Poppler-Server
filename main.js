@@ -82,6 +82,7 @@ async function inputToHtml(req) {
         ignoreImages: true,
         complexOutput: true,
         extractHidden: true,
+        noDrm: true,
         zoom: 1.3
     }
     if (singlePage) options.singlePage = true;
