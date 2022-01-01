@@ -2,6 +2,7 @@
 output
 uploads
 ssl
+.well-known
 
 # Logs
 logs
