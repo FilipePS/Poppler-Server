@@ -4,12 +4,11 @@
   "description": "",
   "main": "main.js",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.2",
     "formidable": "^1.2.6",
     "morgan": "^1.10.0",
     "node-poppler": "^4.1.2",
-    "pm2": "^5.1.2",
-    "serve-index": "^1.9.1"
+    "pm2": "^5.1.2"
   },
   "devDependencies": {},
   "scripts": {
