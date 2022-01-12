@@ -50,7 +50,7 @@ app.get('/result/:fileId', async function (req, res) {
                 resolve(row)
             })
         })
-        originalName = null
+
         if (originalName) {
             res.setHeader('Content-disposition', 'inline; filename=' + encodeURIComponent(originalName))
         } else {
