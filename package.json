@@ -8,9 +8,13 @@
     "formidable": "^1.2.6",
     "morgan": "^1.10.0",
     "node-poppler": "^4.1.2",
-    "pm2": "^5.1.2"
+    "pm2": "^5.1.2",
+    "sqlite3": "^5.0.2",
+    "uuid": "^8.3.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
   "scripts": {
     "start": "clear && sudo nodejs main.js",
     "start_pm2": "sudo clear && sudo npx pm2 start main.js -e \"error.log\" -o \"output.log\"",

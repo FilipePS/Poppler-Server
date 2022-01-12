@@ -11,4 +11,5 @@ sudo apt install zip -y
 npm install
 
 mkdir uploads
-mkdir output
+mkdir result
+mkdir db

@@ -5,13 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/w3.css">
+    <link rel="stylesheet" href="css/icons.css">
     <title>PDF to HTML</title>
 </head>
 <body>
-    <p>Select a PDF document to convert it to HTML. Uploaded files will be deleted from the server within 24 hours.</p>
-    <form action="/pdftohtml" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" id="" accept="application/pdf" required>
-        <input type="submit" value="Send">
-    </form>
+    <div class="w3-container w3-center" style="width:80%; margin:auto;">
+        <h1 class="w3-text">Convert PDF to HTML easily</h1>
+        <h6 class="w3-text">The files will be permanently deleted within 6 hours</h6>
+        <button id="btnAction" class="w3-btn w3-deep-orange w3-padding w3-large w3-round" style="display: flex; text-align: center; justify-content: center; align-items: center">
+            <i class="gg-file-add"></i>
+            <span style="margin-left: 16px;">Select File</span>
+        </button>
+    </div>
+    
+    <div style="display: none;">
+        <form id="formUpload" action="/uploadfile" method="post" enctype="multipart/form-data">
+            <input id="btnInputFile" type="file" name="file" accept="application/pdf" required style="display: none;">
+            <input type="submit">
+        </form>
+    </div>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
