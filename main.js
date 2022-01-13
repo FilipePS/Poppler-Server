@@ -88,9 +88,9 @@ app.post('/uploadfile', async function (req, res) {
     }
 })
 
-app.get('/convertfile', async function (req, res) {
+app.get('/convertfile/:fileId', async function (req, res) {
     try {
-        const url = await convertFile(req.query.fileId)
+        const url = await convertFile(req.params.fileId)
         res.json({status: 1, url})
     } catch (e) {
         console.error(e)

@@ -38,7 +38,7 @@ function onFile() {
         if (this.readyState == 4 && xhttp.response.status) {
             btnAction.querySelector('i').setAttribute('class', 'gg-swap')
             span.textContent = 'Converting...'
-            fetch('/convertfile?fileId=' + encodeURIComponent(xhttp.response.fileId))
+            fetch('/convertfile/' + encodeURIComponent(xhttp.response.fileId))
             .then(response => response.json())
             .then(response => {
                 if (response.url) {
